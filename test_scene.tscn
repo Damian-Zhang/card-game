@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://djc5chj5h2cni"]
+
+[ext_resource type="Script" uid="uid://t5rdxmlf5kgh" path="res://test_scene.gd" id="1_uhqqe"]
+
+[node name="TestScene" type="Control" unique_id=1375930472]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_uhqqe")
+
+[node name="Hand" type="Control" parent="." unique_id=288060370]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Button" type="Button" parent="." unique_id=142203827]
+custom_minimum_size = Vector2(100, 160)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -80.0
+offset_bottom = 80.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "deal cards"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://bao6qsv2rq2x1"]
+
+[ext_resource type="Script" uid="uid://dssohuj4m4tsf" path="res://card.gd" id="1_kikvd"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rjlel"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="Card" type="Control" unique_id=1150682532]
+custom_minimum_size = Vector2(350, 650)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 100.0
+offset_bottom = 160.0
+script = ExtResource("1_kikvd")
+
+[node name="Panel" type="Panel" parent="." unique_id=354872208]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_rjlel")
+
+[connection signal="gui_input" from="Panel" to="." method="_on_panel_gui_input"]
+[connection signal="mouse_entered" from="Panel" to="." method="_on_panel_mouse_entered"]
+[connection signal="mouse_exited" from="Panel" to="." method="_on_panel_mouse_exited"]

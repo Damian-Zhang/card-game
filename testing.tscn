@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://cd21865msg6bb"]
+
+[sub_resource type="GDScript" id="GDScript_v62h7"]
+script/source = "extends Node2D
+"
+
+[node name="Testing" type="Node2D" unique_id=399694215]
+script = SubResource("GDScript_v62h7")
+
+[node name="Button" type="Button" parent="." unique_id=433259537]
+custom_minimum_size = Vector2(100, 160)
+offset_left = 67.0
+offset_top = 36.0
+offset_right = 167.0
+offset_bottom = 196.0
+text = "deal cards"
