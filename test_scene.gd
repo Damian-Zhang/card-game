@@ -21,6 +21,19 @@ func add_card():
 	await get_tree().create_timer(0.1). timeout
 	move()
 	
+func select_card(new_card):
+	# 1. Loop through all cards in the hand
+	for card in hand.get_children():
+		# If another card is already selected, put it back
+		if card.get("is_selected") and card != new_card:
+			card.deselect()
+	
+	# 2. Move the new card to the center right
+	new_card.move_to_center_right()
+	
+	# 3. Refresh the rest of the hand positions
+	move()
+	
 func move(hovered_index: int = -1):
 	var spread_dist = 40.0
 	var lift_dist = 150.0
@@ -28,6 +41,13 @@ func move(hovered_index: int = -1):
 	
 	for i in card_size:
 		var card = hand.get_child(i)
+		
+		# If the card has the 'is_selected' variable and it's true, skip it!
+		if card.get("is_selected") == true:
+			continue
+			
+		if card.get("tween"):
+			card.tween.kill()
 		
 		# 1. Calculate base angle and fan position
 		var angle = (i - center_num) * 3
