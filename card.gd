@@ -1,10 +1,27 @@
 extends Control
 
 @onready var panel:Panel =  $Panel
+@onready var texture_rect = $CardArt
 
 var tween: Tween # Keep a reference to the tween
 var is_ready:bool = false
 var is_selected: bool = false # NEW: Tracks if the card has been played/clicked
+
+func setup_card(index: int, deck: DeckData):
+	var sheet = deck.sheet_texture
+	var columns = deck.columns
+	var width = deck.width
+	var height = deck.height
+	
+	# Calculate X and Y based on index
+	var row = index / columns
+	var col = index % columns
+	
+	# Create the AtlasTexture in code (Zero effort!)
+	var atlas_tex = AtlasTexture.new()
+	atlas_tex.atlas = sheet
+	atlas_tex.region = Rect2(col * width, row * height, width, height)   
+	texture_rect.texture = atlas_tex
 
 func _ready() ->void:
 	await get_tree().create_timer(0.2).timeout

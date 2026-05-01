@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bao6qsv2rq2x1"]
 
 [ext_resource type="Script" uid="uid://dssohuj4m4tsf" path="res://card.gd" id="1_kikvd"]
+[ext_resource type="Texture2D" uid="uid://dretwxl6oduaq" path="res://Assets/Starting_Card.png" id="2_rjlel"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rjlel"]
 bg_color = Color(0, 0, 0, 1)
@@ -13,8 +14,12 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_rjlel"]
+atlas = ExtResource("2_rjlel")
+region = Rect2(0, 0, 1077, 1542)
+
 [node name="Card" type="Control" unique_id=1150682532]
-custom_minimum_size = Vector2(350, 650)
+custom_minimum_size = Vector2(337, 487)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 100.0
@@ -29,6 +34,18 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_rjlel")
+
+[node name="CardArt" type="TextureRect" parent="." unique_id=1074263366]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("AtlasTexture_rjlel")
+expand_mode = 1
+stretch_mode = 5
 
 [connection signal="gui_input" from="Panel" to="." method="_on_panel_gui_input"]
 [connection signal="mouse_entered" from="Panel" to="." method="_on_panel_mouse_entered"]

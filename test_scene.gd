@@ -4,11 +4,17 @@ const CARD = preload("uid://bao6qsv2rq2x1")
 
 @onready var hand: Control = $Hand
 @onready var button: Button = $Button
+@export var active_deck: DeckData
 
 var base_pos: Vector2:
 	get:
 		return get_viewport_rect().size * Vector2(0.5, 1.0)
 var card_size:int = 0
+
+func _ready():
+	active_deck = load("res://StartingDeck.tres") 
+	if active_deck == null:
+		print("Failed to load deck resource! Check your file path.")
 
 func _on_button_pressed() -> void:
 	add_card()
@@ -16,6 +22,9 @@ func _on_button_pressed() -> void:
 func add_card():
 	var new_card = CARD.instantiate()
 	hand.add_child(new_card)
+	
+	new_card.setup_card(0,active_deck) # Tell the card which art to show
+	
 	new_card.global_position = button.global_position
 	card_size += 1
 	await get_tree().create_timer(0.1). timeout
