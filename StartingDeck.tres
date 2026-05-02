@@ -2,10 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bom2cdfrm31tg" path="res://DeckData.gd" id="1_ldkpo"]
 [ext_resource type="Script" uid="uid://bbsm6odl73oqa" path="res://CardData.gd" id="1_unatl"]
-[ext_resource type="Texture2D" uid="uid://dretwxl6oduaq" path="res://Assets/Starting_Card.png" id="2_4qwxg"]
 
 [resource]
 script = ExtResource("1_ldkpo")
-deck_name = "Starting Deck"
-sheet_texture = ExtResource("2_4qwxg")
 metadata/_custom_type_script = "uid://bom2cdfrm31tg"

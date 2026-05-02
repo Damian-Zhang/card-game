@@ -9,19 +9,31 @@ const CARD = preload("uid://bao6qsv2rq2x1")
 var my_deck = DeckData.new()
 var card_0 = preload("res://Card_Resources/Backup_Fund_Data.tres")
 var card_1 = preload("res://Card_Resources/Strike_Data.tres")
+var card_2 = preload("res://Card_Resources/Ceresan_Thief.tres")
+var card_3 = preload("res://Card_Resources/Virenian_Doe.tres")
 var base_pos: Vector2:
 	get:
 		return get_viewport_rect().size * Vector2(0.5, 1.0)
 var card_size:int = 0
+var is_animating: bool = false
 
 func _ready():
-	active_deck = load("res://StartingDeck.tres") 
+	#active_deck = load("res://StartingDeck.tres") 
 	if active_deck == null:
 		print("Failed to load deck resource! Check your file path.")
 	
+	initializeStartingDeck()
+	
+func initializeStartingDeck():
+	var cardData_group_1 = CardDataGroup.new()
+	cardData_group_1.front_data = card_1
+	cardData_group_1.back_data = card_2
 	for i in range(6):
-		my_deck.card_list.append(card_1)
-	my_deck.card_list.append(card_0)
+		my_deck.card_list.append(cardData_group_1)
+	var cardData_group_2 = CardDataGroup.new()
+	cardData_group_2.front_data = card_0
+	cardData_group_2.back_data = card_3
+	my_deck.card_list.append(cardData_group_2)
 	my_deck.initialize_deck()
 
 func _on_button_pressed() -> void:
@@ -33,9 +45,9 @@ func add_card():
 		return
 	
 	var new_card = CARD.instantiate()
-	new_card.front_data = my_deck.draw_pile.pop_front()
-	new_card.back_data = new_card.front_data.duplicate();
-	new_card.back_data.visual_index = new_card.back_data.visual_index + 1
+	var popCard: CardDataGroup = my_deck.draw_pile.pop_front()
+	new_card.front_data = popCard.front_data
+	new_card.back_data = popCard.back_data
 	hand.add_child(new_card)
 	
 	new_card.setup_card() # setup new card
@@ -46,6 +58,8 @@ func add_card():
 	move()
 	
 func select_card(new_card):
+	is_animating = true
+	
 	# 1. Loop through all cards in the hand
 	for card in hand.get_children():
 		# If another card is already selected, put it back
@@ -55,13 +69,12 @@ func select_card(new_card):
 				card.flip_card(false)
 	
 	# 2. Move the new card to the center right
-	new_card.move_to_center_right()
-	
-	if new_card.has_method("flip_card"):
-		new_card.flip_card(true)
+	await new_card.move_to_center_right()
 	
 	# 3. Refresh the rest of the hand positions
 	move()
+	
+	is_animating = false
 	
 func move(hovered_index: int = -1):
 	var spread_dist = 40.0
@@ -110,3 +123,15 @@ func move(hovered_index: int = -1):
 		tween.tween_property(card, "global_position", target_position, 0.15)
 		tween.parallel().tween_property(card, "rotation_degrees", angle, 0.15)
 		
+		
+func _unhandled_input(event: InputEvent) -> void:
+	if is_animating == true:
+		return
+	if event is InputEventKey and event.keycode == KEY_F and event.pressed:
+		for card in hand.get_children():
+			if card.get("is_selected") == true:
+				# Toggle: if it's currently face down (true), show_front should be false
+				# This depends on how your 'show_front' logic interprets the bool
+				var current_face_down = card.get("is_face_down")
+				card.flip_card(!current_face_down)
+				break

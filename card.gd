@@ -48,6 +48,7 @@ func setup_card():
 func _ready() ->void:
 	await get_tree().create_timer(0.2).timeout
 	is_ready = true
+	back_texture_rect.visible = false
 
 
 func _on_panel_mouse_entered() -> void:
@@ -88,29 +89,37 @@ func move_to_center_right() -> void:
 	
 	# 3. Animate
 	tween = create_tween().set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
-	tween.tween_property(self, "global_position", target_pos, 0.5)
+	tween.tween_property(self, "global_position", target_pos, 0.3)
 	tween.parallel().tween_property(self, "rotation_degrees", 0, 0.5)
 	tween.parallel().tween_property(self, "scale", Vector2(1.5, 1.5), 0.5)
 	
 	z_index = 100
 	
+	await tween.finished
+	
 func flip_card(show_front: bool):
-	# Don't run the animation if we are already showing that side
 	if is_face_down == show_front:
 		return
 	
 	is_face_down = show_front
 	
-	var tween = create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
+	# 1. Determine the target scale based on selection status
+	var target_scale_value = 1.5 if is_selected else 1.0
+	var target_scale = Vector2(target_scale_value, target_scale_value)
 	
-	# 1. Shrink the whole card to 0 width to simulate rotation
-	tween.tween_property(self, "scale:x", 0.0, 0.1)
+	# Ensure pivot is centered so the rotation looks natural
+	pivot_offset = Vector2(0, 0)
 	
-	# 2. Swap visibility of the Art nodes only
-	tween.tween_callback(func():
+	var flip_tween = create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
+	
+	# 2. Shrink X to 0, but keep Y at the target scale to prevent vertical jumping
+	flip_tween.tween_property(self, "scale", Vector2(0.0, target_scale.y), 0.1)
+	
+	# 3. Swap visibility of the Art nodes
+	flip_tween.tween_callback(func():
 		front_texture_rect.visible = !is_face_down
 		back_texture_rect.visible = is_face_down
 	)
 	
-	# 3. Grow back to full width
-	tween.tween_property(self, "scale:x", 1.0, 0.1)
+	# 4. Grow back to the correct final scale
+	flip_tween.tween_property(self, "scale", target_scale, 0.1)

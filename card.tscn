@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bao6qsv2rq2x1"]
 
 [ext_resource type="Script" uid="uid://dssohuj4m4tsf" path="res://card.gd" id="1_kikvd"]
-[ext_resource type="Texture2D" uid="uid://dretwxl6oduaq" path="res://Assets/Starting_Card.png" id="2_rjlel"]
+[ext_resource type="Texture2D" uid="uid://bywsvlh5rkgol" path="res://Assets/Starting_Card_Back.png" id="2_rjlel"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rjlel"]
 atlas = ExtResource("2_rjlel")
@@ -11,8 +11,8 @@ region = Rect2(0, 0, 718, 1124)
 custom_minimum_size = Vector2(337, 487)
 layout_mode = 3
 anchors_preset = 0
-offset_right = 100.0
-offset_bottom = 160.0
+offset_right = 337.0
+offset_bottom = 487.0
 pivot_offset_ratio = Vector2(0.5, 0.5)
 script = ExtResource("1_kikvd")
 
