@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://clt8ihce780d1"]
+
+[ext_resource type="Script" uid="uid://bbsm6odl73oqa" path="res://CardData.gd" id="1_ay0lk"]
+[ext_resource type="Resource" uid="uid://pbg58hmklbfi" path="res://Texture Preset/Starting_Card_Kai_Roux.tres" id="2_cqxef"]
+
+[resource]
+script = ExtResource("1_ay0lk")
+texture_preset = ExtResource("2_cqxef")
+card_name = "Guardian Squad"
+action_cost = 1
+card_type = "Ally"
+card_state = "Deck"
+metadata/_custom_type_script = "uid://bbsm6odl73oqa"

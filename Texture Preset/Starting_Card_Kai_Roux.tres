@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="CardStyle" format=3 uid="uid://pbg58hmklbfi"]
+
+[ext_resource type="Script" uid="uid://dh2ohpjlsoe2d" path="res://CardStyle.gd" id="1_qilsp"]
+[ext_resource type="Texture2D" uid="uid://bdc781j06clw0" path="res://Assets/Kai_Roux_StartingDeck.png" id="2_qilsp"]
+
+[resource]
+script = ExtResource("1_qilsp")
+sheet_texture = ExtResource("2_qilsp")
+columns = 3
+width = 718.0
+height = 1124.0
+metadata/_custom_type_script = "uid://dh2ohpjlsoe2d"

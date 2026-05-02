@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://b4wjavec6v1fv"]
+
+[ext_resource type="Script" uid="uid://bbsm6odl73oqa" path="res://CardData.gd" id="1_axxhs"]
+[ext_resource type="Resource" uid="uid://pbg58hmklbfi" path="res://Texture Preset/Starting_Card_Kai_Roux.tres" id="2_ba4vn"]
+
+[resource]
+script = ExtResource("1_axxhs")
+texture_preset = ExtResource("2_ba4vn")
+visual_index = 2
+card_name = "Business_Manner"
+action_cost = 1
+card_type = "Tactical"
+card_state = "Deck"
+metadata/_custom_type_script = "uid://bbsm6odl73oqa"

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://bivjscqf8rl40"]
+
+[ext_resource type="Script" uid="uid://bbsm6odl73oqa" path="res://CardData.gd" id="1_4ty1s"]
+[ext_resource type="Resource" uid="uid://kuahik4dv4c4" path="res://Texture Preset/Starting_Enemy_Kai_Roux.tres" id="2_70xp4"]
+
+[resource]
+script = ExtResource("1_4ty1s")
+texture_preset = ExtResource("2_70xp4")
+visual_index = 2
+card_name = "Sporeling"
+card_type = "Monster"
+card_state = "Deck"
+metadata/_custom_type_script = "uid://bbsm6odl73oqa"

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://618b75tb8ioe"]
+
+[ext_resource type="Script" uid="uid://bbsm6odl73oqa" path="res://CardData.gd" id="1_bt0e2"]
+[ext_resource type="Resource" uid="uid://kuahik4dv4c4" path="res://Texture Preset/Starting_Enemy_Kai_Roux.tres" id="2_3v4ip"]
+
+[resource]
+script = ExtResource("1_bt0e2")
+texture_preset = ExtResource("2_3v4ip")
+card_name = "Backalley Blademaster"
+card_type = "Human"
+card_state = "Deck"
+metadata/_custom_type_script = "uid://bbsm6odl73oqa"

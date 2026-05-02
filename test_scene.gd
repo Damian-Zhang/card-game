@@ -7,10 +7,11 @@ const CARD = preload("uid://bao6qsv2rq2x1")
 @export var active_deck: DeckData
 
 var my_deck = DeckData.new()
-var card_0 = preload("res://Card_Resources/Backup_Fund_Data.tres")
-var card_1 = preload("res://Card_Resources/Strike_Data.tres")
-var card_2 = preload("res://Card_Resources/Ceresan_Thief.tres")
-var card_3 = preload("res://Card_Resources/Virenian_Doe.tres")
+var card_0:CardData
+var card_1:CardData
+var card_2:CardData
+var card_3:CardData
+var kai_deck:Array[String] = ["Guardian_Squad", "Backalley_Blademaster_Kai_GS", "Strength_Harmonize","Junker Cyclist_Kai_SH", "Business_Manner", "Sporeling_Kai_BM"]
 var base_pos: Vector2:
 	get:
 		return get_viewport_rect().size * Vector2(0.5, 1.0)
@@ -25,16 +26,42 @@ func _ready():
 	initializeStartingDeck()
 	
 func initializeStartingDeck():
+	
+	#starting default cards
+	card_0 = preload("res://Card_Resources/Backup_Fund_Data.tres")
+	card_1 = preload("res://Card_Resources/Strike_Data.tres")
+	card_2 = preload("res://Card_Resources/Ceresan_Thief.tres")
+	card_3 = preload("res://Card_Resources/Virenian_Doe.tres")
 	var cardData_group_1 = CardDataGroup.new()
 	cardData_group_1.front_data = card_1
 	cardData_group_1.back_data = card_2
 	for i in range(6):
 		my_deck.card_list.append(cardData_group_1)
-	var cardData_group_2 = CardDataGroup.new()
-	cardData_group_2.front_data = card_0
-	cardData_group_2.back_data = card_3
-	my_deck.card_list.append(cardData_group_2)
+	addCardToDeck(card_0, card_3, my_deck)
+	
+	# character cards
+	var firstCard_data: CardData
+	var lastCard_data: CardData
+	for i in kai_deck.size():
+		var card_name = kai_deck[i]
+		
+		# Check if index is 0 or even
+		if i % 2 == 0:
+			# This handles Index 0, 2, 4, 6...
+			firstCard_data = load("res://Card_Resources/" + card_name + ".tres")
+			print("loading:", "res://Card_Resources/", card_name, ".tres")
+		else:
+			# This handles Index 1, 3, 5, 7... (Odd numbers)
+			lastCard_data = load("res://Card_Resources/" + card_name + ".tres")
+			addCardToDeck(firstCard_data, lastCard_data, my_deck)
+			
 	my_deck.initialize_deck()
+	
+func addCardToDeck(firstCard_data:CardData, lastCard_data:CardData, my_deck:DeckData):
+	var cardData_group = CardDataGroup.new()
+	cardData_group.front_data = firstCard_data.duplicate()
+	cardData_group.back_data = lastCard_data.duplicate()
+	my_deck.card_list.append(cardData_group.duplicate())
 
 func _on_button_pressed() -> void:
 	add_card()
