@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="CardStyle" format=3 uid="uid://b1ai7ixnanv4u"]
+
+[ext_resource type="Script" uid="uid://dh2ohpjlsoe2d" path="res://CardStyle.gd" id="1_2qfpa"]
+[ext_resource type="Texture2D" uid="uid://bywsvlh5rkgol" path="res://Assets/Starting_Card_Back.png" id="2_7wyh7"]
+
+[resource]
+script = ExtResource("1_2qfpa")
+sheet_texture = ExtResource("2_7wyh7")
+columns = 2
+width = 408.0
+height = 642.0
+metadata/_custom_type_script = "uid://dh2ohpjlsoe2d"

@@ -1,7 +1,6 @@
 [gd_resource type="Resource" script_class="CardData" format=3 uid="uid://c6ycx24itoc21"]
 
 [ext_resource type="Script" uid="uid://bbsm6odl73oqa" path="res://CardData.gd" id="1_85fnc"]
-[ext_resource type="Texture2D" uid="uid://dretwxl6oduaq" path="res://Assets/Starting_Card.png" id="2_ypvar"]
 [ext_resource type="Resource" uid="uid://dnusg26ssiyvh" path="res://Texture Preset/Starting_Card.tres" id="3_6ymak"]
 
 [resource]
@@ -10,8 +9,4 @@ texture_preset = ExtResource("3_6ymak")
 card_name = "Backup Fund"
 card_type = "Tactical"
 card_state = "Deck"
-sheet_texture = ExtResource("2_ypvar")
-columns = 2
-width = 718.0
-height = 1124.0
 metadata/_custom_type_script = "uid://bbsm6odl73oqa"

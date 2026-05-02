@@ -33,7 +33,9 @@ func add_card():
 		return
 	
 	var new_card = CARD.instantiate()
-	new_card.data = my_deck.draw_pile.pop_front()
+	new_card.front_data = my_deck.draw_pile.pop_front()
+	new_card.back_data = new_card.front_data.duplicate();
+	new_card.back_data.visual_index = new_card.back_data.visual_index + 1
 	hand.add_child(new_card)
 	
 	new_card.setup_card() # setup new card
@@ -49,9 +51,14 @@ func select_card(new_card):
 		# If another card is already selected, put it back
 		if card.get("is_selected") and card != new_card:
 			card.deselect()
+			if card.has_method("flip_card"):
+				card.flip_card(false)
 	
 	# 2. Move the new card to the center right
 	new_card.move_to_center_right()
+	
+	if new_card.has_method("flip_card"):
+		new_card.flip_card(true)
 	
 	# 3. Refresh the rest of the hand positions
 	move()
@@ -102,3 +109,4 @@ func move(hovered_index: int = -1):
 		var tween = create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 		tween.tween_property(card, "global_position", target_position, 0.15)
 		tween.parallel().tween_property(card, "rotation_degrees", angle, 0.15)
+		

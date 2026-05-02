@@ -5,8 +5,8 @@
 
 [resource]
 script = ExtResource("1_tnlge")
-front_sheet_texture = ExtResource("2_ub0p6")
-front_columns = 2
-front_width = 718.0
-front_height = 1124.0
+sheet_texture = ExtResource("2_ub0p6")
+columns = 2
+width = 718.0
+height = 1124.0
 metadata/_custom_type_script = "uid://dh2ohpjlsoe2d"

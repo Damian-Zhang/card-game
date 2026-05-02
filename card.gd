@@ -5,27 +5,45 @@ extends Control
 @onready var back_texture_rect = $Back_CardArt
 
 var tween: Tween # Keep a reference to the tween
-var data: CardData
+var front_data: CardData
+var back_data: CardData
 var is_ready:bool = false
 var is_selected: bool = false # NEW: Tracks if the card has been played/clicked
+var is_face_down: bool = false
 
 func setup_card():
 	
-	var front_index = data.visual_index # Get index from the resource
-	var front_sheet = data.texture_preset.front_sheet_texture
-	var front_columns = data.texture_preset.front_columns
-	var front_width = data.texture_preset.front_width
-	var front_height = data.texture_preset.front_height
+	var front_index = front_data.visual_index # Get index from the resource
+	var front_sheet = front_data.texture_preset.sheet_texture
+	var front_columns = front_data.texture_preset.columns
+	var front_width = front_data.texture_preset.width
+	var front_height = front_data.texture_preset.height
 	
 	# Calculate X and Y based on index
-	var row = front_index / front_columns
-	var col = front_index % front_columns
+	var front_row = front_index / front_columns
+	var front_col = front_index % front_columns
 	
 	# Create the AtlasTexture in code (Zero effort!)
 	var front_atlas_tex = AtlasTexture.new()
 	front_atlas_tex.atlas = front_sheet
-	front_atlas_tex.region = Rect2(col * front_width, row * front_height, front_width, front_height)   
+	front_atlas_tex.region = Rect2(front_col * front_width, front_row * front_height, front_width, front_height)   
 	front_texture_rect.texture = front_atlas_tex
+	
+	var back_index = back_data.visual_index # Get index from the resource
+	var back_sheet = back_data.texture_preset.sheet_texture
+	var back_columns = back_data.texture_preset.columns
+	var back_width = back_data.texture_preset.width
+	var back_height = back_data.texture_preset.height
+	
+	# Calculate X and Y based on index
+	var back_row = back_index / back_columns
+	var back_col = back_index % back_columns
+	
+	# Create the AtlasTexture in code (Zero effort!)
+	var back_atlas_tex = AtlasTexture.new()
+	back_atlas_tex.atlas = back_sheet
+	back_atlas_tex.region = Rect2(back_col * back_width, back_row * back_height, back_width, back_height)   
+	back_texture_rect.texture = back_atlas_tex
 
 func _ready() ->void:
 	await get_tree().create_timer(0.2).timeout
@@ -49,6 +67,8 @@ func deselect() -> void:
 	is_selected = false
 	z_index = 0
 	# No tween needed here; the Hand's move() function will pull it back automatically
+	var d_tween = create_tween().set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
+	d_tween.tween_property(self, "scale", Vector2(1.0, 1.0), 0.3)
 
 func move_to_center_right() -> void:
 	if tween:
@@ -64,11 +84,33 @@ func move_to_center_right() -> void:
 	
 	# 2. Adjust Y-axis only to center it vertically
 	# (Since target_pos.x is already the left-edge position we want, we only offset Y)
-	target_pos.y -= size.y / 2
+	target_pos.y -= (size.y * 1.5) / 2
 	
 	# 3. Animate
 	tween = create_tween().set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
 	tween.tween_property(self, "global_position", target_pos, 0.5)
 	tween.parallel().tween_property(self, "rotation_degrees", 0, 0.5)
+	tween.parallel().tween_property(self, "scale", Vector2(1.5, 1.5), 0.5)
 	
 	z_index = 100
+	
+func flip_card(show_front: bool):
+	# Don't run the animation if we are already showing that side
+	if is_face_down == show_front:
+		return
+	
+	is_face_down = show_front
+	
+	var tween = create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
+	
+	# 1. Shrink the whole card to 0 width to simulate rotation
+	tween.tween_property(self, "scale:x", 0.0, 0.1)
+	
+	# 2. Swap visibility of the Art nodes only
+	tween.tween_callback(func():
+		front_texture_rect.visible = !is_face_down
+		back_texture_rect.visible = is_face_down
+	)
+	
+	# 3. Grow back to full width
+	tween.tween_property(self, "scale:x", 1.0, 0.1)

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://bg6i1fsn1tq6i"]
+
+[ext_resource type="Script" uid="uid://bbsm6odl73oqa" path="res://CardData.gd" id="1_xqvw7"]
+[ext_resource type="Resource" uid="uid://b1ai7ixnanv4u" path="res://Texture Preset/Starting_Card_Back.tres" id="2_8dqn3"]
+
+[resource]
+script = ExtResource("1_xqvw7")
+texture_preset = ExtResource("2_8dqn3")
+visual_index = 1
+card_name = "Ceresan Thief"
+card_type = "Human"
+card_state = "Deck"
+metadata/_custom_type_script = "uid://bbsm6odl73oqa"
