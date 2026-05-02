@@ -6,6 +6,9 @@ const CARD = preload("uid://bao6qsv2rq2x1")
 @onready var button: Button = $Button
 @export var active_deck: DeckData
 
+var my_deck = DeckData.new()
+var card_0 = preload("res://Card_Resources/Backup_Fund_Data.tres")
+var card_1 = preload("res://Card_Resources/Strike_Data.tres")
 var base_pos: Vector2:
 	get:
 		return get_viewport_rect().size * Vector2(0.5, 1.0)
@@ -15,15 +18,26 @@ func _ready():
 	active_deck = load("res://StartingDeck.tres") 
 	if active_deck == null:
 		print("Failed to load deck resource! Check your file path.")
+	
+	for i in range(4):
+		my_deck.card_list.append(card_0)
+		my_deck.card_list.append(card_1)
+	
+	my_deck.initialize_deck()
 
 func _on_button_pressed() -> void:
 	add_card()
 	
 func add_card():
+	if my_deck.draw_pile.is_empty():
+		print("Deck is empty! No more cards to draw.")
+		return
+	
 	var new_card = CARD.instantiate()
+	new_card.data = my_deck.draw_pile.pop_front()
 	hand.add_child(new_card)
 	
-	new_card.setup_card(0,active_deck) # Tell the card which art to show
+	new_card.setup_card(active_deck) # setup new card
 	
 	new_card.global_position = button.global_position
 	card_size += 1

@@ -1,6 +1,7 @@
 [gd_resource type="Resource" script_class="DeckData" format=3 uid="uid://y7i3j6cxff0v"]
 
 [ext_resource type="Script" uid="uid://bom2cdfrm31tg" path="res://DeckData.gd" id="1_ldkpo"]
+[ext_resource type="Script" uid="uid://bbsm6odl73oqa" path="res://CardData.gd" id="1_unatl"]
 [ext_resource type="Texture2D" uid="uid://dretwxl6oduaq" path="res://Assets/Starting_Card.png" id="2_4qwxg"]
 
 [resource]

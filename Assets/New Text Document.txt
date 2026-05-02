@@ -1,0 +1,70 @@
+Since your `DeckData` resource already handles the visual layout, the best way to handle card stats (like Health and Attack) is to create a second Resource type for the individual cards.
+
+Think of it this way: `DeckData` is the **container** (the box and the instructions), and `CardData` is the **content** (the specific person or item on the card).
+
+### 1. Create the `CardData` Script
+This script defines what a "Card" actually is in your game database.
+
+```gdscript
+# CardData.gd
+extends Resource
+class_name CardData
+
+@export var card_name: String = ""
+@export var attack: int = 0
+@export var health: int = 0
+@export_multiline var description: String = ""
+```
+
+### 2. Update your `DeckData` to hold these cards
+Now, modify your `DeckData.gd` so it can hold a list of these card stats.
+
+```gdscript
+# DeckData.gd
+extends Resource
+class_name DeckData
+
+@export var deck_name: String = "Default Deck"
+@export var sheet_texture: Texture2D
+@export var columns: int = 2
+@export var width: float = 718.0
+@export var height: float = 1124.0
+
+# This is your "Database" for this specific deck!
+@export var cards: Array[CardData] = [] 
+```
+
+### 3. Build the Database in the Inspector
+Now, when you click on your `StartingDeck.tres` in the Inspector:
+1.  You will see a new **Cards** array section.
+2.  Change the size to **4**.
+3.  For each "Slot," click the down arrow and select **New CardData**.
+4.  Type in the Name, Attack, and Health for that specific card index.
+
+### 4. Update the `setup_card` Logic
+Now your card can show both the correct art **and** the correct stats from your "database."
+
+```gdscript
+# Inside card.gd
+func setup_card(index: int, deck: DeckData):
+	# 1. Visual Setup (The logic we already fixed)
+	var atlas_tex = AtlasTexture.new()
+	atlas_tex.atlas = deck.sheet_texture
+	atlas_tex.region = Rect2((index % deck.columns) * deck.width, (index / deck.columns) * deck.height, deck.width, deck.height)
+	texture_rect.texture = atlas_tex
+	
+	# 2. Stats Setup (The Database lookup)
+	if index < deck.cards.size():
+		var data = deck.cards[index]
+		# Assuming you have Labels on your card UI
+		name_label.text = data.card_name
+		attack_label.text = str(data.attack)
+		health_label.text = str(data.health)
+	else:
+		print("Warning: No stats found in the database for index ", index)
+```
+
+### Why this is a great "Database"
+*   **Encapsulation:** Everything about the "Starting Deck" (the image, the slice math, and the unit stats) is inside one single `.tres` file.
+*   **Easy Swapping:** If you load `res://BossDeck.tres`, the `deck.cards` array will automatically contain the Boss's high stats and name instead.
+*   **No Coding for Balance:** You can balance your game by just typing numbers in the Godot Inspector instead of digging through code.

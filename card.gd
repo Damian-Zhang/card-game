@@ -4,10 +4,13 @@ extends Control
 @onready var texture_rect = $CardArt
 
 var tween: Tween # Keep a reference to the tween
+var data: CardData
 var is_ready:bool = false
 var is_selected: bool = false # NEW: Tracks if the card has been played/clicked
 
-func setup_card(index: int, deck: DeckData):
+func setup_card(deck: DeckData):
+	
+	var index = data.visual_index # Get index from the resource
 	var sheet = deck.sheet_texture
 	var columns = deck.columns
 	var width = deck.width

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://c6ycx24itoc21"]
+
+[ext_resource type="Script" uid="uid://bbsm6odl73oqa" path="res://CardData.gd" id="1_85fnc"]
+
+[resource]
+script = ExtResource("1_85fnc")
+card_name = "Backup Fund"
+card_type = "Tactical"
+card_state = "Deck"
+metadata/_custom_type_script = "uid://bbsm6odl73oqa"
