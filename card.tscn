@@ -16,7 +16,7 @@ corner_radius_bottom_left = 8
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rjlel"]
 atlas = ExtResource("2_rjlel")
-region = Rect2(0, 0, 1077, 1542)
+region = Rect2(0, 0, 718, 1124)
 
 [node name="Card" type="Control" unique_id=1150682532]
 custom_minimum_size = Vector2(337, 487)
@@ -35,7 +35,18 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_rjlel")
 
-[node name="CardArt" type="TextureRect" parent="." unique_id=1074263366]
+[node name="Back_CardArt" type="TextureRect" parent="." unique_id=108852891]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Front_CardArt" type="TextureRect" parent="." unique_id=1074263366]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

@@ -1,30 +1,31 @@
 extends Control
 
 @onready var panel:Panel =  $Panel
-@onready var texture_rect = $CardArt
+@onready var front_texture_rect = $Front_CardArt
+@onready var back_texture_rect = $Back_CardArt
 
 var tween: Tween # Keep a reference to the tween
 var data: CardData
 var is_ready:bool = false
 var is_selected: bool = false # NEW: Tracks if the card has been played/clicked
 
-func setup_card(deck: DeckData):
+func setup_card():
 	
-	var index = data.visual_index # Get index from the resource
-	var sheet = deck.sheet_texture
-	var columns = deck.columns
-	var width = deck.width
-	var height = deck.height
+	var front_index = data.visual_index # Get index from the resource
+	var front_sheet = data.texture_preset.front_sheet_texture
+	var front_columns = data.texture_preset.front_columns
+	var front_width = data.texture_preset.front_width
+	var front_height = data.texture_preset.front_height
 	
 	# Calculate X and Y based on index
-	var row = index / columns
-	var col = index % columns
+	var row = front_index / front_columns
+	var col = front_index % front_columns
 	
 	# Create the AtlasTexture in code (Zero effort!)
-	var atlas_tex = AtlasTexture.new()
-	atlas_tex.atlas = sheet
-	atlas_tex.region = Rect2(col * width, row * height, width, height)   
-	texture_rect.texture = atlas_tex
+	var front_atlas_tex = AtlasTexture.new()
+	front_atlas_tex.atlas = front_sheet
+	front_atlas_tex.region = Rect2(col * front_width, row * front_height, front_width, front_height)   
+	front_texture_rect.texture = front_atlas_tex
 
 func _ready() ->void:
 	await get_tree().create_timer(0.2).timeout

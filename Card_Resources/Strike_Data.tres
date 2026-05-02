@@ -1,12 +1,19 @@
 [gd_resource type="Resource" script_class="CardData" format=3 uid="uid://vweyjd1v336u"]
 
-[ext_resource type="Script" uid="uid://bbsm6odl73oqa" path="res://CardData.gd" id="1_7t1ch"]
+[ext_resource type="Script" uid="uid://bbsm6odl73oqa" path="res://CardData.gd" id="1_kv2pv"]
+[ext_resource type="Texture2D" uid="uid://dretwxl6oduaq" path="res://Assets/Starting_Card.png" id="2_hbhld"]
+[ext_resource type="Resource" uid="uid://dnusg26ssiyvh" path="res://Texture Preset/Starting_Card.tres" id="3_gaas4"]
 
 [resource]
-script = ExtResource("1_7t1ch")
+script = ExtResource("1_kv2pv")
+texture_preset = ExtResource("3_gaas4")
 visual_index = 1
 card_name = "Strike"
 action_cost = 1
 card_type = "Tactical"
 card_state = "Deck"
+sheet_texture = ExtResource("2_hbhld")
+columns = 2
+width = 718.0
+height = 1124.0
 metadata/_custom_type_script = "uid://bbsm6odl73oqa"

@@ -19,10 +19,9 @@ func _ready():
 	if active_deck == null:
 		print("Failed to load deck resource! Check your file path.")
 	
-	for i in range(4):
-		my_deck.card_list.append(card_0)
+	for i in range(6):
 		my_deck.card_list.append(card_1)
-	
+	my_deck.card_list.append(card_0)
 	my_deck.initialize_deck()
 
 func _on_button_pressed() -> void:
@@ -37,7 +36,7 @@ func add_card():
 	new_card.data = my_deck.draw_pile.pop_front()
 	hand.add_child(new_card)
 	
-	new_card.setup_card(active_deck) # setup new card
+	new_card.setup_card() # setup new card
 	
 	new_card.global_position = button.global_position
 	card_size += 1
