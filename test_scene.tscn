@@ -74,7 +74,7 @@ texture = ExtResource("3_sasra")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Label2" type="Label" parent="Control/HealthIcon" unique_id=1234135957]
+[node name="Health_Count" type="Label" parent="Control/HealthIcon" unique_id=1234135957]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -101,7 +101,7 @@ texture = ExtResource("4_coq8p")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Label2" type="Label" parent="Control/ShieldIcon" unique_id=1581174715]
+[node name="Shield_Count" type="Label" parent="Control/ShieldIcon" unique_id=1581174715]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
