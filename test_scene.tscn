@@ -3,12 +3,15 @@
 [ext_resource type="Script" uid="uid://t5rdxmlf5kgh" path="res://test_scene.gd" id="1_uhqqe"]
 [ext_resource type="Texture2D" uid="uid://dpiyaos6owbxr" path="res://Assets/Character_UI.png" id="2_coq8p"]
 [ext_resource type="Texture2D" uid="uid://whec22a425sc" path="res://Assets/Character_Portrait.png" id="2_sasra"]
-[ext_resource type="Texture2D" uid="uid://cidbrwwiqqa4u" path="res://Assets/Health_Icon.png" id="3_sasra"]
-[ext_resource type="Texture2D" uid="uid://bpftug06uchgr" path="res://Assets/Shield_Icon.png" id="4_coq8p"]
+[ext_resource type="Texture2D" uid="uid://bywsvlh5rkgol" path="res://Assets/Starting_Card_Back.png" id="4_coq8p"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2nij2"]
 atlas = ExtResource("2_sasra")
 region = Rect2(1064, 0, 1064, 1479)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7cbxl"]
+atlas = ExtResource("4_coq8p")
+region = Rect2(0, 0, 718, 1124)
 
 [node name="TestScene" type="Control" unique_id=1375930472]
 custom_minimum_size = Vector2(3264, 1836)
@@ -101,37 +104,64 @@ theme_override_colors/font_color = Color(0.28627452, 0.85490197, 0.99607843, 1)
 theme_override_font_sizes/font_size = 60
 text = "10"
 
-[node name="Control" type="Control" parent="." unique_id=91633907]
-custom_minimum_size = Vector2(468, 140)
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=485738210]
+clip_contents = true
+custom_minimum_size = Vector2(2214, 1003)
+layout_mode = 0
+offset_left = 490.0
+offset_top = 300.0
+offset_right = 2704.0
+offset_bottom = 1303.0
+
+[node name="ClippingFirewall" type="Control" parent="CenterContainer" unique_id=301474011]
+custom_minimum_size = Vector2(2214, 1003)
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="CenterContainer/ClippingFirewall" unique_id=626864718]
 layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -684.0
+offset_top = -440.0
+offset_right = 684.0
+offset_bottom = 440.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 20
+columns = 2
+
+[node name="Enemy1" type="Panel" parent="CenterContainer/ClippingFirewall/GridContainer" unique_id=1194404462]
+custom_minimum_size = Vector2(674.4, 430.8)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/ClippingFirewall/GridContainer/Enemy1" unique_id=1534208614]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -140.0
-offset_right = 468.0
-grow_vertical = 0
-
-[node name="HealthIcon" type="TextureRect" parent="Control" unique_id=2132157178]
-visible = false
-layout_mode = 1
-offset_left = -35.0
-offset_top = -20.0
-offset_right = 165.0
-offset_bottom = 180.0
-texture = ExtResource("3_sasra")
-expand_mode = 1
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -1.5707964
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = SubResource("AtlasTexture_7cbxl")
+expand_mode = 4
 stretch_mode = 5
 
-[node name="ShieldIcon" type="TextureRect" parent="Control" unique_id=1616074696]
-visible = false
-layout_mode = 1
-offset_left = 280.0
-offset_top = -43.0
-offset_right = 510.0
-offset_bottom = 187.0
-texture = ExtResource("4_coq8p")
-expand_mode = 1
-stretch_mode = 5
+[node name="Enemy2" type="Panel" parent="CenterContainer/ClippingFirewall/GridContainer" unique_id=977789777]
+custom_minimum_size = Vector2(674.4, 430.8)
+layout_mode = 2
+
+[node name="Enemy3" type="Panel" parent="CenterContainer/ClippingFirewall/GridContainer" unique_id=2147316651]
+custom_minimum_size = Vector2(674.4, 430.8)
+layout_mode = 2
+
+[node name="Enemy4" type="Panel" parent="CenterContainer/ClippingFirewall/GridContainer" unique_id=1370741414]
+custom_minimum_size = Vector2(674.4, 430.8)
+layout_mode = 2
 
 [node name="Hand" type="Control" parent="." unique_id=288060370]
 custom_minimum_size = Vector2(3264, 1836)
