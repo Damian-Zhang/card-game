@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cidbrwwiqqa4u"
-path="res://.godot/imported/Health_Icon.png-c6da812c1ba77e9a6e0fe838cf4ba41d.ctex"
+uid="uid://dpiyaos6owbxr"
+path="res://.godot/imported/Character_UI.png-6518c2164138c482e2aec1ff6d06d798.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Health_Icon.png"
-dest_files=["res://.godot/imported/Health_Icon.png-c6da812c1ba77e9a6e0fe838cf4ba41d.ctex"]
+source_file="res://Assets/Character_UI.png"
+dest_files=["res://.godot/imported/Character_UI.png-6518c2164138c482e2aec1ff6d06d798.ctex"]
 
 [params]
 

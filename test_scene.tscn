@@ -1,24 +1,21 @@
 [gd_scene format=3 uid="uid://djc5chj5h2cni"]
 
 [ext_resource type="Script" uid="uid://t5rdxmlf5kgh" path="res://test_scene.gd" id="1_uhqqe"]
+[ext_resource type="Texture2D" uid="uid://dpiyaos6owbxr" path="res://Assets/Character_UI.png" id="2_coq8p"]
 [ext_resource type="Texture2D" uid="uid://whec22a425sc" path="res://Assets/Character_Portrait.png" id="2_sasra"]
 [ext_resource type="Texture2D" uid="uid://cidbrwwiqqa4u" path="res://Assets/Health_Icon.png" id="3_sasra"]
 [ext_resource type="Texture2D" uid="uid://bpftug06uchgr" path="res://Assets/Shield_Icon.png" id="4_coq8p"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_coq8p"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_2nij2"]
 atlas = ExtResource("2_sasra")
-region = Rect2(2128, 0, 1064, 1479)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ia1lp"]
-bg_color = Color(0.16062859, 0.16062865, 0.16062853, 1)
+region = Rect2(1064, 0, 1064, 1479)
 
 [node name="TestScene" type="Control" unique_id=1375930472]
+custom_minimum_size = Vector2(3264, 1836)
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 0
+offset_right = 3264.0
+offset_bottom = 1836.0
 mouse_filter = 1
 script = ExtResource("1_uhqqe")
 
@@ -28,9 +25,36 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -668.85
-offset_right = 468.0
+offset_left = -15.0
+offset_top = -663.0
+offset_right = 453.0
+offset_bottom = 5.8499756
 grow_vertical = 0
+
+[node name="PortraitMask" type="Control" parent="CharacterPortrait" unique_id=1220297840]
+clip_contents = true
+custom_minimum_size = Vector2(1064, 1479)
+anchors_preset = 0
+offset_left = 42.0
+offset_top = 21.0
+offset_right = 1106.0
+offset_bottom = 1500.0
+scale = Vector2(0.37, 0.37)
+
+[node name="TextureRect3" type="TextureRect" parent="CharacterPortrait/PortraitMask" unique_id=1296116938]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -140.0
+offset_right = 884.0
+offset_bottom = 1439.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.635, 0.635)
+texture = SubResource("AtlasTexture_2nij2")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="TextureRect" type="TextureRect" parent="CharacterPortrait" unique_id=695144452]
 layout_mode = 1
@@ -39,9 +63,43 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = SubResource("AtlasTexture_coq8p")
+texture = ExtResource("2_coq8p")
 expand_mode = 1
 stretch_mode = 5
+
+[node name="Health_Count" type="Label" parent="CharacterPortrait" unique_id=1234135957]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -333.0
+offset_top = 233.57501
+offset_right = -219.0
+offset_bottom = 370.575
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.99607843, 0.45882353, 0.19607843, 1)
+theme_override_font_sizes/font_size = 60
+text = "10"
+
+[node name="Shield_Count" type="Label" parent="CharacterPortrait" unique_id=1581174715]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -215.0
+offset_top = 233.57501
+offset_right = -101.0
+offset_bottom = 370.575
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.28627452, 0.85490197, 0.99607843, 1)
+theme_override_font_sizes/font_size = 60
+text = "10"
 
 [node name="Control" type="Control" parent="." unique_id=91633907]
 custom_minimum_size = Vector2(468, 140)
@@ -53,18 +111,8 @@ offset_top = -140.0
 offset_right = 468.0
 grow_vertical = 0
 
-[node name="Panel" type="Panel" parent="Control" unique_id=1110979372]
-custom_minimum_size = Vector2(468, 150)
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -140.0
-offset_right = 468.0
-grow_vertical = 0
-theme_override_styles/panel = SubResource("StyleBoxFlat_ia1lp")
-
 [node name="HealthIcon" type="TextureRect" parent="Control" unique_id=2132157178]
+visible = false
 layout_mode = 1
 offset_left = -35.0
 offset_top = -20.0
@@ -74,24 +122,8 @@ texture = ExtResource("3_sasra")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Health_Count" type="Label" parent="Control/HealthIcon" unique_id=1234135957]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -52.0
-offset_top = -71.0
-offset_right = 62.0
-offset_bottom = 66.0
-grow_horizontal = 0
-grow_vertical = 2
-theme_override_colors/font_color = Color(0.99607843, 0.45882353, 0.19607843, 1)
-theme_override_font_sizes/font_size = 83
-text = "10"
-
 [node name="ShieldIcon" type="TextureRect" parent="Control" unique_id=1616074696]
+visible = false
 layout_mode = 1
 offset_left = 280.0
 offset_top = -43.0
@@ -101,30 +133,12 @@ texture = ExtResource("4_coq8p")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Shield_Count" type="Label" parent="Control/ShieldIcon" unique_id=1581174715]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -265.0
-offset_top = -63.0
-offset_right = -151.0
-offset_bottom = 74.0
-grow_horizontal = 0
-grow_vertical = 2
-theme_override_colors/font_color = Color(0.28627452, 0.85490197, 0.99607843, 1)
-theme_override_font_sizes/font_size = 83
-text = "10"
-
 [node name="Hand" type="Control" parent="." unique_id=288060370]
+custom_minimum_size = Vector2(3264, 1836)
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 0
+offset_right = 3264.0
+offset_bottom = 1836.0
 mouse_filter = 2
 
 [node name="Button" type="Button" parent="." unique_id=142203827]
