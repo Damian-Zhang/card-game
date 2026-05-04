@@ -4,6 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://dpiyaos6owbxr" path="res://Assets/Character_UI.png" id="2_coq8p"]
 [ext_resource type="Texture2D" uid="uid://whec22a425sc" path="res://Assets/Character_Portrait.png" id="2_sasra"]
 [ext_resource type="Texture2D" uid="uid://bywsvlh5rkgol" path="res://Assets/Starting_Card_Back.png" id="4_coq8p"]
+[ext_resource type="Texture2D" uid="uid://c6cn30xrjed3p" path="res://Assets/Confirm_Button.png" id="5_2nij2"]
+[ext_resource type="Texture2D" uid="uid://d4cwbvj34k1au" path="res://Assets/Cancel_Button.png" id="6_7cbxl"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2nij2"]
 atlas = ExtResource("2_sasra")
@@ -132,7 +134,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 20
-columns = 2
+columns = 3
 
 [node name="Enemy1" type="Panel" parent="CenterContainer/ClippingFirewall/GridContainer" unique_id=1194404462]
 custom_minimum_size = Vector2(674.4, 430.8)
@@ -183,4 +185,42 @@ offset_bottom = 80.0
 grow_vertical = 2
 text = "deal cards"
 
+[node name="Confirm_Button" type="Button" parent="." unique_id=94662727]
+visible = false
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1208.0
+offset_top = -1194.0
+offset_bottom = -290.0
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(0.26, 0.26)
+pivot_offset = Vector2(1208, 904)
+icon = ExtResource("5_2nij2")
+flat = true
+
+[node name="Cancel_Button" type="Button" parent="." unique_id=304750993]
+visible = false
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1208.0
+offset_top = -1044.0
+offset_bottom = -140.0
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(0.26, 0.26)
+pivot_offset = Vector2(1208, 904)
+icon = ExtResource("6_7cbxl")
+flat = true
+
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Confirm_Button" to="." method="_on_confirm_button_pressed"]
+[connection signal="pressed" from="Cancel_Button" to="." method="_on_cancel_button_pressed"]

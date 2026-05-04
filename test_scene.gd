@@ -4,9 +4,12 @@ const CARD = preload("uid://bao6qsv2rq2x1")
 
 @onready var hand: Control = $Hand
 @onready var button: Button = $Button
+@onready var confirm_button: Button = $Confirm_Button
+@onready var cancel_button: Button = $Cancel_Button
 @export var active_deck: DeckData
 
 var my_deck = DeckData.new()
+var selected_card = CARD.instantiate()
 var card_0:CardData
 var card_1:CardData
 var card_2:CardData
@@ -86,6 +89,9 @@ func add_card():
 	
 func select_card(new_card):
 	is_animating = true
+	show_card_action_button()
+	
+	selected_card = new_card
 	
 	# 1. Loop through all cards in the hand
 	for card in hand.get_children():
@@ -162,3 +168,31 @@ func _unhandled_input(event: InputEvent) -> void:
 				var current_face_down = card.get("is_face_down")
 				card.flip_card(!current_face_down)
 				break
+
+func show_card_action_button():
+	confirm_button.visible = true
+	cancel_button.visible = true
+	confirm_button.disabled = false
+	cancel_button.disabled = false
+	confirm_button.mouse_filter = Control.MOUSE_FILTER_STOP
+	cancel_button.mouse_filter = Control.MOUSE_FILTER_STOP
+	
+func hide_card_action_button():
+	confirm_button.disabled = true
+	cancel_button.disabled = true
+	confirm_button.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	cancel_button.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	confirm_button.visible = false
+	cancel_button.visible = false
+
+func _on_cancel_button_pressed() -> void:
+	selected_card.deselect()
+	if selected_card.has_method("flip_card"):
+		selected_card.flip_card(false)
+	selected_card = CARD.instantiate()
+	hide_card_action_button()
+	move()
+
+
+func _on_confirm_button_pressed() -> void:
+	pass # Replace with function body.
